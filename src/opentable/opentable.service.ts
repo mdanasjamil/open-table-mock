@@ -18,13 +18,13 @@ const MOCK_AVAILABILITY_DATA: any[] = [
         "scc_enabled": true
       },
       "times": [
-        "2025-11-13T12:45",
-        "2025-11-13T13:00",
-        "2025-11-13T13:15"
+        "2025-11-15T12:45",
+        "2025-11-15T13:00",
+        "2025-11-15T13:15"
       ],
       "times_available": [
         {
-          "time": "2025-11-13T12:45",
+          "time": "2025-11-15T12:45",
           "availability_types": [
             {
               "type": "Standard",
@@ -71,7 +71,7 @@ const MOCK_AVAILABILITY_DATA: any[] = [
           ]
         },
         {
-          "time": "2025-11-13T13:00",
+          "time": "2025-11-15T13:00",
           "availability_types": [
             {
               "type": "Standard",
@@ -118,7 +118,7 @@ const MOCK_AVAILABILITY_DATA: any[] = [
           ]
         },
         {
-          "time": "2025-11-13T13:15",
+          "time": "2025-11-15T13:15",
           "availability_types": [
             {
               "type": "Standard",
