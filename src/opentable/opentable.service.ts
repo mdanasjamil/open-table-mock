@@ -18,13 +18,13 @@ const MOCK_AVAILABILITY_DATA: any[] = [
         "scc_enabled": true
       },
       "times": [
-        "2025-11-15T12:45",
-        "2025-11-15T13:00",
-        "2025-11-15T13:15"
+        "2025-11-22T12:45",
+        "2025-11-22T13:00",
+        "2025-11-22T13:15"
       ],
       "times_available": [
         {
-          "time": "2025-11-15T12:45",
+          "time": "2025-11-22T12:45",
           "availability_types": [
             {
               "type": "Standard",
@@ -71,7 +71,7 @@ const MOCK_AVAILABILITY_DATA: any[] = [
           ]
         },
         {
-          "time": "2025-11-15T13:00",
+          "time": "2025-11-22T13:00",
           "availability_types": [
             {
               "type": "Standard",
@@ -118,7 +118,7 @@ const MOCK_AVAILABILITY_DATA: any[] = [
           ]
         },
         {
-          "time": "2025-11-15T13:15",
+          "time": "2025-11-22T13:15",
           "availability_types": [
             {
               "type": "Standard",
@@ -234,31 +234,28 @@ export class OpenTableService {
   /**
    * @description Fetches mock availability data, filtered *only* by rid and party_size. Ignores time.
    */
-  async getAvailability(rid: number, query: AvailabilityQueryDto): Promise<AvailabilityResponseDto> {
-    
-    this.logger.log(`Fetching mock availability for rid=${rid} with partySize=${query.party_size}. Ignoring time filter.`);
+ async getAvailability(rid: number, query: AvailabilityQueryDto): Promise<AvailabilityResponseDto> {
+  this.logger.log(`Fetching mock availability for rid=${rid}. Ignoring party_size filter.`);
 
-    // 1. Find the mock data block that matches RID and PARTY SIZE.
-    const restaurantAvailabilityBlock = MOCK_AVAILABILITY_DATA.find(data =>
-        data.rid === rid &&
-        data.party_size === query.party_size
-    );
+  // Find any availability block that matches the restaurant id only.
+  const restaurantAvailabilityBlock = MOCK_AVAILABILITY_DATA.find(data => data.rid === rid);
 
-    // 2. If no block matches rid/party_size, return "no availability"
-    if (!restaurantAvailabilityBlock) {
-        this.logger.warn(`No availability block found for: RID=${rid}, Party=${query.party_size}`);
-        return this.getNoAvailabilityResponse(rid, query);
-    }
-    
-    // 3. Return the *entire* found block without checking the time.
-    this.logger.log(`Found availability block. Returning all available times for RID=${rid}, Party=${query.party_size}`);
-    return {
-        rid,
-        party_size: restaurantAvailabilityBlock.party_size,
-        ...restaurantAvailabilityBlock, // Spread the entire found block
-        query,
-    } as AvailabilityResponseDto;
+  // If nothing for that rid, return "no availability"
+  if (!restaurantAvailabilityBlock) {
+    this.logger.warn(`No availability block found for: RID=${rid}`);
+    return this.getNoAvailabilityResponse(rid, query);
   }
+
+  // Return the found block (party_size in the response will be whatever the block contains or undefined).
+  this.logger.log(`Found availability block. Returning all available times for RID=${rid}`);
+  return {
+    rid,
+    // preserve whatever party_size exists in the block (if you prefer to omit it, remove this line)
+    party_size: restaurantAvailabilityBlock.party_size,
+    ...restaurantAvailabilityBlock,
+    query,
+  } as AvailabilityResponseDto;
+}
 
   /**
    * @description Helper function to generate a standard "No Availability" response.
