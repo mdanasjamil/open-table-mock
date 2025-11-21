@@ -6,7 +6,7 @@ import { SlotLockRequestDto } from './dto/slot-lock-request.dto';
 import { SlotLockResponseDto } from './dto/slot-lock-response.dto';
 import { ReservationRequestDto, ReservationResponseDto } from './dto/reservation-request.dto';
 
-// --- EMBEDDED MOCK DATA (UNCHANGED) ---
+// --- EMBEDDED MOCK DATA (UNCHANGED) ---...
 // ... (Interfaces are unchanged)
 
 const MOCK_AVAILABILITY_DATA: any[] = [
