@@ -33,7 +33,8 @@ const MOCK_AVAILABILITY_DATA: any[] = [
                   "id": 1,
                   "table_type": [
                     "default",
-                    "outdoor"
+                    "outdoor",
+                      "indoor",
                   ]
                 }
               ]
@@ -80,7 +81,8 @@ const MOCK_AVAILABILITY_DATA: any[] = [
                   "id": 1,
                   "table_type": [
                     "default",
-                    "outdoor"
+                    "outdoor",
+                      "indoor"
                   ]
                 }
               ]
@@ -127,7 +129,8 @@ const MOCK_AVAILABILITY_DATA: any[] = [
                   "id": 1,
                   "table_type": [
                     "default",
-                    "outdoor"
+                    "outdoor",
+                      "indoor"
                   ]
                 }
               ]
